@@ -10,8 +10,9 @@ const targetDate = new Date("March 24, 2026 00:00:00").getTime();
 const advNameSpans = HER_NAME.split('').map(char => `<span class="adv-name-letter" style="display:inline-block; opacity:0;">${char === ' ' ? '&nbsp;' : char}</span>`).join('');
 document.getElementById("adv-title").innerHTML = `<i class="fa-regular fa-clock pulse-icon"></i> Adv Happy Birthday <span style="display:inline-block; white-space:nowrap">${advNameSpans}</span>!`;
 
-const bdayNameSpans = HER_NAME.split('').map(char => `<span class="bday-name-letter" style="display:inline-block; opacity:0;">${char === ' ' ? '&nbsp;' : char}</span>`).join('');
-document.querySelector(".birthday-title").innerHTML = `<i class="fa-solid fa-gift bounce icon-glow"></i> Happy Birthday <span style="display:inline-block; white-space:nowrap">${bdayNameSpans}</span>! <i class="fa-solid fa-cake-candles bounce icon-glow" style="animation-delay: 1s"></i>`;
+const postLoginText = "psycho " + HER_NAME;
+const bdayNameSpans = postLoginText.split('').map(char => `<span class="bday-name-letter" style="display:inline-block; opacity:0;">${char === ' ' ? '&nbsp;' : char}</span>`).join('');
+document.querySelector(".birthday-title").innerHTML = `<i class="fa-regular fa-face-grin-squint-tears bounce icon-glow"></i> Welcome <span style="display:inline-block; white-space:nowrap">${bdayNameSpans}</span>! <i class="fa-solid fa-cake-candles bounce icon-glow" style="animation-delay: 1s"></i>`;
 
 // Login Logic
 const loginModal = document.getElementById("login-modal");
