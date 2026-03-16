@@ -13,7 +13,7 @@
 
 <body>
     <div id="tsparticles"></div>
-    <div class="container">
+    <div class="container" id="main-container">
         <div id="pre-birthday" class="content">
             <h1 id="adv-title" class="title fade-in">Adv Happy Birthday [Her Name]!</h1>
             <div class="countdown-container glow-effect fade-in-delayed">
@@ -39,10 +39,32 @@
             </div>
             <p class="dev-note fade-in-delayed"><i class="fa-solid fa-code"></i> Note: This site is still under
                 development. It will fully open on your (Nazma) birthday.</p>
+                
+            <button id="open-login-btn" class="glow-btn fade-in-delayed hidden" style="margin-top: -1rem;">
+                <i class="fa-solid fa-unlock-keyhole"></i> Enter Code
+            </button>
         </div>
 
         <div id="birthday-greeting" class="content hidden">
             <h1 class="birthday-title hero-glow"></h1>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-overlay hidden">
+        <div class="glow-effect login-box">
+            <h2 style="color: white; margin-bottom: 1rem; font-weight: 300;">Secret Access</h2>
+            <div class="input-group">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" id="username" placeholder="Name" autocomplete="off" />
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="password" placeholder="Password" />
+            </div>
+            <button id="login-btn">Unlock</button>
+            <p id="error-msg" class="error-msg hidden">Incorrect name or password.</p>
+            <button id="close-modal-btn" class="close-btn"><i class="fa-solid fa-xmark"></i></button>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>

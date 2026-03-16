@@ -13,7 +13,75 @@ document.getElementById("adv-title").innerHTML = `<i class="fa-regular fa-clock 
 const bdayNameSpans = HER_NAME.split('').map(char => `<span class="bday-name-letter" style="display:inline-block; opacity:0;">${char === ' ' ? '&nbsp;' : char}</span>`).join('');
 document.querySelector(".birthday-title").innerHTML = `<i class="fa-solid fa-gift bounce icon-glow"></i> Happy Birthday <span style="display:inline-block; white-space:nowrap">${bdayNameSpans}</span>! <i class="fa-solid fa-cake-candles bounce icon-glow" style="animation-delay: 1s"></i>`;
 
-// Animate the name dropping immediately on page load
+// Login Logic
+const loginModal = document.getElementById("login-modal");
+const openLoginBtn = document.getElementById("open-login-btn");
+const closeModalBtn = document.getElementById("close-modal-btn");
+const loginBtn = document.getElementById("login-btn");
+const errorMsg = document.getElementById("error-msg");
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const preBirthdayView = document.getElementById("pre-birthday");
+const birthdayView = document.getElementById("birthday-greeting");
+
+openLoginBtn.addEventListener("click", (e) => {
+    e.stopPropagation(); // Prevent confetti click
+    loginModal.classList.remove("hidden");
+});
+
+closeModalBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    loginModal.classList.add("hidden");
+});
+
+loginBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const name = usernameInput.value.trim().toLowerCase();
+    const pass = passwordInput.value.trim();
+    
+    if ((name === "nazma" || name === "nazma ") && pass === "414") {
+        loginModal.classList.add("hidden");
+        
+        // Hide countdown, show birthday greeting
+        preBirthdayView.classList.add("hidden");
+        birthdayView.classList.remove("hidden");
+        
+        // Trigger fireworks
+        launchConfetti();
+        
+        // Trigger name dropping animation after successful login
+        if (window.gsap) {
+            gsap.fromTo(".bday-name-letter",
+                {
+                    y: () => -window.innerHeight - 100,
+                    x: () => (Math.random() - 0.5) * window.innerWidth,
+                    rotation: () => (Math.random() - 0.5) * 360,
+                    opacity: 0,
+                    scale: 3
+                },
+                {
+                    y: 0,
+                    x: 0,
+                    rotation: 0,
+                    opacity: 1,
+                    scale: 1,
+                    duration: 2.0,
+                    stagger: 0.2,
+                    ease: "power3.out",
+                    delay: 0.2
+                }
+            );
+        }
+    } else {
+        errorMsg.classList.remove("hidden");
+        // Shake effect
+        const loginBox = document.querySelector(".login-box");
+        loginBox.style.animation = "none";
+        setTimeout(() => loginBox.style.animation = "bounceIcon 0.5s", 10);
+    }
+});
+
+// Drop initial name once on page load for the countdown page
 if (window.gsap) {
     gsap.fromTo(".adv-name-letter",
         {
@@ -35,6 +103,36 @@ if (window.gsap) {
             delay: 0.5
         }
     );
+}
+
+function launchConfetti() {
+    if (window.confetti) {
+        var duration = 15 * 1000;
+        var animationEnd = Date.now() + duration;
+        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        var burstInterval = setInterval(function () {
+            var timeLeft = animationEnd - Date.now();
+
+            if (timeLeft <= 0) {
+                return clearInterval(burstInterval);
+            }
+
+            var particleCount = 50 * (timeLeft / duration);
+            confetti({
+                ...defaults, particleCount,
+                origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+            });
+            confetti({
+                ...defaults, particleCount,
+                origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+            });
+        }, 250);
+    }
 }
 
 // Initialize interactive particle background network
@@ -85,9 +183,6 @@ const hoursEl = document.getElementById("hours");
 const minutesEl = document.getElementById("minutes");
 const secondsEl = document.getElementById("seconds");
 
-const preBirthdayView = document.getElementById("pre-birthday");
-const birthdayView = document.getElementById("birthday-greeting");
-
 // Format time with leading zero
 function formatTime(time) {
     return time < 10 ? `0${time}` : time;
@@ -102,60 +197,14 @@ function updateCountdown() {
         // Countdown reached zero
         clearInterval(timerInterval);
 
-        // Hide countdown, show birthday greeting
-        preBirthdayView.classList.add("hidden");
-        birthdayView.classList.remove("hidden");
-
-        // trigger fireworks or extra animations here if you want
-        if (window.gsap) {
-            gsap.fromTo(".bday-name-letter",
-                {
-                    y: () => -window.innerHeight - 100,
-                    x: () => (Math.random() - 0.5) * window.innerWidth,
-                    rotation: () => (Math.random() - 0.5) * 360,
-                    opacity: 0,
-                    scale: 3
-                },
-                {
-                    y: 0,
-                    x: 0,
-                    rotation: 0,
-                    opacity: 1,
-                    scale: 1,
-                    duration: 2.0,
-                    stagger: 0.2,
-                    ease: "power3.out",
-                    delay: 0.1
-                }
-            );
-        }
-        if (window.confetti) {
-            var duration = 15 * 1000;
-            var animationEnd = Date.now() + duration;
-            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-            function randomInRange(min, max) {
-                return Math.random() * (max - min) + min;
-            }
-
-            var burstInterval = setInterval(function () {
-                var timeLeft = animationEnd - Date.now();
-
-                if (timeLeft <= 0) {
-                    return clearInterval(burstInterval);
-                }
-
-                var particleCount = 50 * (timeLeft / duration);
-                confetti({
-                    ...defaults, particleCount,
-                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
-                });
-                confetti({
-                    ...defaults, particleCount,
-                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
-                });
-            }, 250);
-        }
+        // Hide countdown numbers
+        document.querySelector(".countdown-container").classList.add("hidden");
+        
+        // Show the login button
+        openLoginBtn.classList.remove("hidden");
+        
+        // Update dev note text
+        document.querySelector(".dev-note").innerHTML = "The wait is over.";
 
         return;
     }
@@ -180,6 +229,7 @@ const timerInterval = setInterval(updateCountdown, 1000);
 
 // Interactive touch/click effects
 document.addEventListener("click", function(e) {
+    if (e.target.closest('#login-modal')) return; // Don't fire confetti when clicking inside modal
     if (window.confetti) {
         // Calculate the relative click position
         const x = e.clientX / window.innerWidth;
