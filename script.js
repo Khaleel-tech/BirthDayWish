@@ -200,11 +200,8 @@ function updateCountdown() {
         // Hide countdown numbers
         document.querySelector(".countdown-container").classList.add("hidden");
         
-        // Show the login button
-        openLoginBtn.classList.remove("hidden");
-        
         // Update dev note text
-        document.querySelector(".dev-note").innerHTML = "The wait is over.";
+        document.querySelector(".dev-note").innerHTML = "The wait is over. You may now login.";
 
         return;
     }
