@@ -176,16 +176,14 @@ document.addEventListener("click", function(e) {
         
         // Shoot a tiny burst of magical stars/confetti
         confetti({
-            particleCount: 20,
-            spread: 50,
+            particleCount: 30,
+            spread: 60,
             origin: { x: x, y: y },
             colors: ['#a855f7', '#e879f9', '#c084fc', '#f8fafc'],
-            disableForReducedMotion: true,
             zIndex: 100,
             ticks: 50,
             gravity: 0.8,
-            scalar: 0.8,
-            shapes: ['star', 'circle']
+            scalar: 0.8
         });
     }
 });
