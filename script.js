@@ -37,36 +37,47 @@ if (window.gsap) {
     );
 }
 
-// Generate background floating icons
-function createFloatingIcons() {
-    const container = document.getElementById("floating-icons");
-    const icons = ['fa-star', 'fa-heart', 'fa-gift', 'fa-music', 'fa-crown', 'fa-moon'];
-
-    // Create a new icon every 800ms
-    setInterval(() => {
-        const icon = document.createElement("i");
-        const randomIcon = icons[Math.floor(Math.random() * icons.length)];
-        icon.className = `fa-solid ${randomIcon} floating-icon`;
-
-        // Randomize size, position, and duration
-        const size = Math.random() * 1.5 + 0.5; // 0.5rem to 2rem
-        const left = Math.random() * 100; // 0% to 100%
-        const animationDuration = Math.random() * 5 + 8; // 8s to 13s
-
-        icon.style.fontSize = `${size}rem`;
-        icon.style.left = `${left}%`;
-        icon.style.animationDuration = `${animationDuration}s`;
-        icon.style.opacity = Math.random() * 0.5 + 0.1;
-
-        container.appendChild(icon);
-
-        // Remove icon after animation finishes to prevent DOM bloating
-        setTimeout(() => {
-            icon.remove();
-        }, animationDuration * 1000);
-    }, 800);
+// Initialize interactive particle background network
+if (window.tsParticles) {
+    tsParticles.load("tsparticles", {
+        fpsLimit: 60,
+        interactivity: {
+            events: {
+                onHover: { enable: true, mode: "grab" },
+                resize: true,
+            },
+            modes: {
+                grab: { distance: 160, links: { opacity: 0.6 } },
+            },
+        },
+        particles: {
+            color: { value: ["#a855f7", "#ec4899", "#8b5cf6", "#3b82f6"] },
+            links: {
+                color: "#a855f7",
+                distance: 150,
+                enable: true,
+                opacity: 0.2,
+                width: 1,
+            },
+            move: {
+                enable: true,
+                speed: 1.5,
+                direction: "none",
+                random: true,
+                straight: false,
+                outModes: { default: "bounce" },
+            },
+            number: {
+                density: { enable: true, area: 800 },
+                value: 80,
+            },
+            opacity: { value: 0.4 },
+            shape: { type: "circle" },
+            size: { value: { min: 1, max: 2.5 } },
+        },
+        detectRetina: true,
+    });
 }
-createFloatingIcons();
 
 // Elements
 const daysEl = document.getElementById("days");
