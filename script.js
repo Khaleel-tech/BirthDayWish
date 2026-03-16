@@ -166,3 +166,26 @@ updateCountdown();
 
 // Update every second
 const timerInterval = setInterval(updateCountdown, 1000);
+
+// Interactive touch/click effects
+document.addEventListener("click", function(e) {
+    if (window.confetti) {
+        // Calculate the relative click position
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        
+        // Shoot a tiny burst of magical stars/confetti
+        confetti({
+            particleCount: 20,
+            spread: 50,
+            origin: { x: x, y: y },
+            colors: ['#a855f7', '#e879f9', '#c084fc', '#f8fafc'],
+            disableForReducedMotion: true,
+            zIndex: 100,
+            ticks: 50,
+            gravity: 0.8,
+            scalar: 0.8,
+            shapes: ['star', 'circle']
+        });
+    }
+});
