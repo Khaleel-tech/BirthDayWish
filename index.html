@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Something Special...</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="floating-icons" id="floating-icons"></div>
+    <div class="container">
+        <div id="pre-birthday" class="content">
+            <h1 id="adv-title" class="title fade-in">Adv Happy Birthday [Her Name]!</h1>
+            <div class="countdown-container glow-effect fade-in-delayed">
+                <div class="time-box">
+                    <span id="days" class="number">00</span>
+                    <span class="label">Days</span>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-box">
+                    <span id="hours" class="number">00</span>
+                    <span class="label">Hours</span>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-box">
+                    <span id="minutes" class="number">00</span>
+                    <span class="label">Minutes</span>
+                </div>
+                <div class="separator">:</div>
+                <div class="time-box">
+                    <span id="seconds" class="number">00</span>
+                    <span class="label">Seconds</span>
+                </div>
+            </div>
+            <p class="dev-note fade-in-delayed"><i class="fa-solid fa-code"></i> Note: This site is still under
+                development. It will fully open on Nazma's birthday.</p>
+        </div>
+
+        <div id="birthday-greeting" class="content hidden">
+            <h1 class="birthday-title hero-glow"></h1>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
